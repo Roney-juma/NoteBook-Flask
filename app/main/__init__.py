@@ -1,5 +1,4 @@
 from flask import Blueprint
+main = Blueprint('main',__name__)
+from . import views,errors
 
-main = Blueprint('blog',__name__)
-
-from . import views,forms
