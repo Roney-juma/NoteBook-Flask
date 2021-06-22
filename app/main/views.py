@@ -73,3 +73,11 @@ def new_note():
             mail_message("New note created","email/new_note",subscriber.email,note=note)
         return redirect(url_for('main.index'))
     return render_template('add_note.html', form = form)
+
+@main.route('/subscribe',methods = ['POST','GET'])
+def subscribe():
+    email = request.form.get('subscriber')
+    new_subscriber = Subscriber(email = email)
+    new_subscriber.save_subscriber()
+    mail_message("Subscribed to Quick Notes","email/welcome_subscriber",new_subscriber.email,new_subscriber=new_subscriber)
+    return redirect(url_for('main.index'))
