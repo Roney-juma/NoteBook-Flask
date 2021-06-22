@@ -1,4 +1,4 @@
-from flask import render_template, redirect,url_for,abort,request
+from flask import render_template, redirect,url_for,abort,request,flash
 from . import main
 from flask_login import login_required,current_user
 from ..models import User,Note,Subscriber
@@ -9,61 +9,17 @@ from PIL import Image
 from .forms import UpdateProfile,CreateNote
 from ..email import mail_message
 
-@main.route('/profile/<username>')
-@login_required
-def profile(username):
-
-    '''
-    View profile page function that returns the profile details of the current user logged in
-    '''
-    user = User.query.filter_by(username = username).first()
-    
-    if user is None:
-        abort(404)
- 
-    return render_template("profile/profile.html", user = user)     
-    
-
-@main.route('/profile/<username>/update',methods = ['GET','POST'])
-@login_required
-def update_profile(username):
-    user = User.query.filter_by(username = username).first()
-    if user is None:
-        abort(404)
-
-    form = UpdateProfile()
-
-    if form.validate_on_submit():
-        user.bio = form.bio.data
-        db.session.add(user)
-        db.session.commit()
-
-        flash('User bio updated')
-
-        return redirect(url_for('main.profile',username=user.username))
-
-    return render_template('profile/update.html',user=user,form =form)    
-
-@main.route('/profile/<username>/update/pic',methods= ['POST'])
-@login_required
-def update_pic(username):
-    user = User.query.filter_by(username = username).first()
-    if 'photo' in request.files:
-        filename = photos.save(request.files['photo'])
-        path = f'photos/{filename}'
-        user.profile_pic_path = path
-        db.session.commit()
-
-        flash('User pic updated')
-        
-    return redirect(url_for('main.update_profile',username=username))
-
-
 #Views
 @main.route('/')
 def index():
     notes = Note.query.order_by(Note.time.desc())
     return render_template('notes_page.html', notes=notes)
+
+@main.route('/note/<id>')
+@login_required
+def note(id):
+    note = Note.query.get(id)
+    return render_template('note.html',note=note)
 
 @main.route('/new_note', methods=['POST','GET'])
 @login_required
@@ -80,3 +36,54 @@ def new_note():
             mail_message("New note created","email/new_note",subscriber.email,note=note)
         return redirect(url_for('main.index'))
     return render_template('add_note.html', form = form)
+
+@main.route('/subscribe',methods = ['POST','GET'])
+def subscribe():
+    email = request.form.get('subscriber')
+    new_subscriber = Subscriber(email = email)
+    new_subscriber.save_subscriber()
+    mail_message("Subscribed to Quick Notes","email/welcome_subscriber",new_subscriber.email,new_subscriber=new_subscriber)
+    return redirect(url_for('main.index'))
+
+@main.route('/profile/<name>',methods = ['POST','GET'])
+@login_required
+def profile(name):
+    user = User.query.filter_by(username = name).first()
+    if 'photo' in request.files:
+        filename = photos.save(request.files['photo'])
+        path = f'photos/{filename}'
+        user.profile_pic_path = path
+        db.session.commit()
+    return render_template('profile/profile.html',user = user)
+ 
+@main.route('/user/<name>/updateprofile', methods = ['POST','GET'])
+@login_required
+def updateprofile(name):
+    user = User.query.filter_by(username = name).first()
+    form = UpdateProfile()
+    if form.validate_on_submit():
+        user.username = form.username.data
+        user.email = form.email.data
+        user.bio = form.bio.data
+        db.session.commit()
+        return redirect(url_for('main.profile',name=user.username,))
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+        form.bio.data = current_user.bio
+    return render_template('profile/update.html', user = user, form =form)
+
+@main.route('/profile/<username>/update/pic',methods= ['POST'])
+@login_required
+def update_pic(username):
+    user = User.query.filter_by(username = username).first()
+    if 'photo' in request.files:
+        filename = photos.save(request.files['photo'])
+        path = f'photos/{filename}'
+        user.profile_pic_path = path
+        db.session.commit()
+
+        flash('User pic updated')
+        
+    return redirect(url_for('main.update_profile',username=username))
+
