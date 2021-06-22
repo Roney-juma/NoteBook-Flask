@@ -21,3 +21,7 @@ class UpdateProfile(FlaskForm):
       if User.query.filter_by(username = username.data).first():
         raise ValidationError("The username has already been taken")
 
+class CreateNote(FlaskForm):
+  title = StringField('Title',validators=[Required()])
+  content = TextAreaField('Note Content',validators=[Required()])
+  submit = SubmitField('Add')
