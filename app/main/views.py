@@ -9,19 +9,15 @@ from PIL import Image
 from .forms import UpdateProfile,CreateNote
 from ..email import mail_message
 
-@main.route('/profile/<username>')
+@main.route('/profile/<name>',methods = ['POST','GET'])
 @login_required
-def profile(username):
-
-    '''
-    View profile page function that returns the profile details of the current user logged in
-    '''
-    user = User.query.filter_by(username = username).first()
-    
-    if user is None:
-        abort(404)
- 
-    return render_template("profile/profile.html", user = user)     
+def profile(name):
+    user = User.query.filter_by(username = name).first()
+    if 'photo' in request.files:
+        filename = photos.save(request.files['photo'])
+        path = f'photos/{filename}'
+        user.profile_pic_path = path
+        db.session.commit()    
     
 
 @main.route('/profile/<username>/update',methods = ['GET','POST'])
