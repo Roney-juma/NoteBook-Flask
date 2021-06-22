@@ -17,7 +17,7 @@ class User(UserMixin,db.Model):
   secure_password = db.Column(db.String(255),nullable = False)
   bio = db.Column(db.String(255))
   profile_pic_path = db.Column(db.String())
-  notes = db.relationship('note', backref='user', lazy='dynamic')
+  notes = db.relationship('Note', backref='user', lazy='dynamic')
 
 
   @property
@@ -63,7 +63,7 @@ class Note(db.Model):
     return note
 
   def __repr__(self):
-    return f'note {self.title}'
+    return f'Note {self.title}'
 class Subscriber(db.Model):
   __tablename__='subscribers'
   id=db.Column(db.Integer,primary_key=True)
