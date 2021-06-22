@@ -1,0 +1,38 @@
+{% extends 'base.html'%}
+{% block content%}
+
+<div class="profile mt-5">
+  <div class="card testimonial-card">
+
+    <!-- Background color -->
+    <div class="card-up aqua-gradient"></div>
+  
+    <!-- Avatar -->
+    <div class="avatar mx-auto white">
+      <img src="{{url_for('static',filename=user.profile_pic_path)}}" onerror="this.onerror=null;this.src='https://www.iconfinder.com/data/icons/user-pictures/100/unknown-512.png';" class="rounded-circle"
+      alt="Profile Pic">
+    </div>
+  
+    <!-- Content -->
+    <div class="card-body text-center">
+      <!-- Name -->
+      <h4 class="card-title"><span class="badge badge-primary">{{user.username[0] | capitalize}}</span> {{user.username | capitalize}}</h4>
+      <hr>
+      <p class="jumbotron p-4"><i class="fas fa-info mr-2"></i>
+      {%if user.bio%}
+        {{user.bio}}
+      {%else%}
+        {{user.username| capitalize}} has no bio  
+      {%endif%}  
+      </p>
+      <a href="{{url_for('blog.update_profile',username=user.username)}}"><button type="button" class="btn btn-primary mb-3">Edit Profile</button></a>
+
+    
+    </div>
+  
+  </div>
+</div>
+
+
+
+{%endblock%}
