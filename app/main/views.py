@@ -15,6 +15,12 @@ def index():
     notes = Note.query.order_by(Note.time.desc())
     return render_template('notes_page.html', notes=notes)
 
+@main.route('/note/<id>')
+@login_required
+def note(id):
+    note = Note.query.get(id)
+    return render_template('note.html',note=note)
+
 @main.route('/new_note', methods=['POST','GET'])
 @login_required
 def new_note():
