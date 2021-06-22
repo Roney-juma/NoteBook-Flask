@@ -1,0 +1,10 @@
+Hello subscriber!
+
+A new note was created
+
+Title: {{note.title}}
+Post: {{note.content|truncate(30)}}
+
+Regards,
+
+Quick notes - Nicholas Ngetich
