@@ -17,8 +17,7 @@ class User(UserMixin,db.Model):
   secure_password = db.Column(db.String(255),nullable = False)
   bio = db.Column(db.String(255))
   profile_pic_path = db.Column(db.String())
-  blogs = db.relationship('Blog', backref='user', lazy='dynamic')
-  comment = db.relationship('Comment', backref='user', lazy='dynamic')
+  notes = db.relationship('note', backref='user', lazy='dynamic')
 
 
   @property
@@ -42,3 +41,27 @@ class User(UserMixin,db.Model):
   
   def __repr__(self):
     return f'User {self.username}'
+
+class Note(db.Model):
+  __tablename__ = 'notes'
+  id = db.Column(db.Integer, primary_key = True)
+  title = db.Column(db.String(255),nullable = False)
+  content = db.Column(db.Text(), nullable = False)
+  user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+  time = db.Column(db.DateTime, default = datetime.utcnow)
+
+  def save(self):
+    db.session.add(self)
+    db.session.commit()
+
+  def delete(self):
+    db.session.delete(self)
+    db.session.commit()
+
+  def get_note(id):
+    note = Note.query.filter_by(id=id).first()
+    return note
+
+  def __repr__(self):
+    return f'note {self.title}'
+
