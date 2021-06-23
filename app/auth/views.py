@@ -57,4 +57,4 @@ def login_2fa_form():
     if pyotp.TOTP(secret).verify(otp):
         # inform users if OTP is valid
       flash("The TOTP 2FA token is valid", "success")
-      return redirect(request.args.get('next') or url_for('blog.index'))
+      return redirect(request.args.get('next') or url_for('index'))
