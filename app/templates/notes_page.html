@@ -12,8 +12,10 @@
 {% block content %}
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-2">
-      <h2>Profile</h2>
+    <div class="col-md-2 profile-col">
+      <div class="profile-header">
+        <h2>Profile</h2>
+      </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
           <li class="">
@@ -43,8 +45,8 @@
         </ul>
       </div>
     </div>
-    <div class="col-md-5">
-      <div id="notesHeader">
+    <div class="col-md-5 notes-col">
+      <div class="notes-header">
         <h2>All Notes</h2>
       </div>
       <div class="notes" id="notesContainer">
@@ -60,8 +62,10 @@
         {% endfor %}
       </div>
     </div>
-    <div class="col-md-5">
-      <h2>Categories</h2>
+    <div class="col-md-5 categories-col">
+      <div class="categories-header">
+        <h2>Categories</h2>
+      </div>
     </div>
 
   </div>
