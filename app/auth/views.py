@@ -1,4 +1,5 @@
 from flask import render_template,url_for,flash,redirect,request
+import pyotp
 from . import auth
 from flask_login import login_user,login_required,logout_user
 from .forms import RegForm,LoginForm
