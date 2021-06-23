@@ -6,6 +6,35 @@ from ..models import User
 from .. import db
 from ..email import mail_message
 
+
+# 2FA page route
+@auth.route("/login/2fa/")
+def login_2fa():
+    # generating random secret key for authentication
+    secret = pyotp.random_base32()
+    return render_template("login_2fa.html", secret=secret)
+
+
+# 2FA form route
+@auth.route("/login/2fa/", methods=["POST"])
+def login_2fa_form():
+    # getting secret key used by user
+    secret = request.form.get("secret")
+    # getting OTP provided by user
+    otp = int(request.form.get("otp"))
+
+    # verifying submitted OTP with PyOTP
+    if pyotp.TOTP(secret).verify(otp):
+        # inform users if OTP is valid
+        flash("The TOTP 2FA token is valid", "success")
+        return redirect(url_for(request.args.get('next') or url_for('main.index'))
+    else:
+        # inform users if OTP is invalid
+        flash("You have supplied an invalid 2FA token!", "danger")
+        return redirect(url_for("login_2fa"))
+# trying 2fa end
+
+
 @auth.route('/login', methods = ['GET','POST'])
 def login():
   form = LoginForm()
@@ -13,7 +42,7 @@ def login():
     user = User.query.filter_by(email = form.email.data).first()
     if user != None and user.verify_password(form.password.data):
       login_user(user,form.remember.data)
-      return redirect(request.args.get('next') or url_for('main.index'))
+      return redirect(url_for("login_2fa"))
     flash('Invalid username or Password')
 
   return render_template('auth/login.html', loginform = form)
