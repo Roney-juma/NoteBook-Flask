@@ -27,3 +27,8 @@ h2 {
 @media (max-width: 500px) {
 
 }
+.category-item{
+  background-color: #E5E5E5;
+  height: 100px;
+  font-size: medium;
+}
