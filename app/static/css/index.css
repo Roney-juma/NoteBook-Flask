@@ -29,4 +29,6 @@ h2 {
 }
 .category-item{
   background-color: #E5E5E5;
+  height: 100px;
+  font-size: medium;
 }
