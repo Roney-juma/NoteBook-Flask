@@ -1,0 +1,29 @@
+
+h2 {
+  text-align: center;
+}
+.profile-col {
+  height: 100vh;
+  background-color: #16425B;
+}
+.notes-col,.categories-col {
+  height: 100vh;
+  background-color: white
+}
+.notes-header, .categories-header {
+  padding-top: 2vh;
+  height: 10vh;
+}
+.note {
+  background-color: #D4CECE;
+  height: 8vh;
+}
+.notes-header {
+  background-color: #CECDCD;
+}
+.categories-header {
+  background-color: #DCE2E1;
+}
+@media (max-width: 500px) {
+
+}
