@@ -7,13 +7,46 @@
   integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
   integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<link rel="stylesheet" href="../../static/css/index.css" />
+<link rel="stylesheet" href="../static/css/index.css" />
 {% endblock %}
 
 {% block content %}
-<div class="container" style="margin-top: 1%">
+<div class="container-fluid" style="margin-top: 1%">
   <div class="row">
-    <div class="col-md-4 pict">
+    <div class="col-md-2">
+      <div class="profile-header">
+        <a class="btn btn-outline-primary" id="post" href="{{url_for('main.index')}}">Home</a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="">
+            {% if current_user.is_authenticated %}
+            <a class="btn btn-outline-primary" id="post" href="{{url_for('main.new_note')}}">Add Note</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" style='margin-right:30px' data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+              <i class="fas fa-user"></i>&nbsp;<strong>{{current_user.username}}</strong> </a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+              <a class="dropdown-item" href="{{url_for('main.profile',name=current_user.username)}}"><i
+                  class="far fa-user"></i>&nbsp; My account</a><br>
+              <a class="dropdown-item" href="{{url_for('auth.logout')}}"><i class="fas fa-sign-out-alt"></i>&nbsp; Log
+                out</a>
+            </div>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('auth.login')}}" style='margin-right:30px'><i
+                class="fas fa-sign-in-alt"></i>&nbsp; <strong>Log In</strong></a>
+          </li>
+          <li class="nav-item">
+            <a style='margin-right:30px' class="nav-link" href="{{url_for('auth.signup')}}"><i
+                class="fas fa-user-plus"></i></i>&nbsp; <strong>Sign Up</strong></a>
+          </li>
+          {%endif%}
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-5 pict">
 
 
       <div class="card testimonial-card">
@@ -48,7 +81,7 @@
         </div>
       </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-5">
       <h2>Personal Details</h2>
       <table id="userTable" class="table table-bordered">
         <tr>
@@ -64,8 +97,8 @@
           <td>{{user.bio}}</td>
         </tr>
         <tr>
-          <td>Number of Blogs:</td>
-          <td>{{user.blogs.count()}}</td>
+          <td>Number of Notes:</td>
+          <td>{{user.notes.count()}}</td>
         </tr>
       </table>
     </div>
