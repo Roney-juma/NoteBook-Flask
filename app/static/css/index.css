@@ -18,7 +18,7 @@ h2 {
 }
 .note {
   background-color: #D4CECE;
-  height: 8vh;
+  height: auto;
 }
 .notes-header {
   background-color: #CECDCD;
