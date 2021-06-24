@@ -14,7 +14,7 @@
   <div class="row">
     <div class="col-md-2 profile-col">
       <div class="profile-header">
-        <h2>Profile</h2>
+        <a class="btn btn-outline-primary" id="post" href="{{url_for('main.index')}}">Home</a>
       </div>
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
@@ -53,7 +53,8 @@
         {% for note in notes %}
         <div class="note">
           <h4><a href="{{url_for('main.note',id = note.id)}}">{{note.title | upper}}</a></h4>
-          <h5>{{note.description}}</h5>
+          <h5>{{note.content}}</h5>
+          <h5>Category: {{note.category}}</h5>
           <p>Noted on :<small class="text-muted mr-2"> {{note.time.strftime('%d-%m-%Y')}}</small> by <a
               href="user/{{note.user.username}}">{{note.user.username}}</a></p>
 
@@ -66,6 +67,25 @@
       <div class="categories-header">
         <h2>Categories</h2>
       </div>
+      <div class="categories">
+        <div class="category_list">
+          <h3>To Do List</h3>
+          <a id="sign" href="{{url_for('main.toDoList')}}">View items in To Do List</a>
+        </div>
+        <div class="category_list">
+          <h3>Items to Remember</h3>
+          <a id="sign" href="{{url_for('main.toRecallList')}}">View items to recall</a>
+        </div>
+        <div class="category_list">
+          <h3>Online Resources</h3>
+          <a id="sign" href="{{url_for('main.online')}}">View items in To Do List</a>
+        </div>
+        <div class="category_list">
+          <h3>Generall</h3>
+          <a id="sign" href="{{url_for('main.general')}}">View items in To Do List</a>
+        </div>
+      </div>
+     
     </div>
 
   </div>

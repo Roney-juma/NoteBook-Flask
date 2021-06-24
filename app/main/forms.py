@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField,FileAllowed
-from wtforms import StringField,TextAreaField, SubmitField,ValidationError
+from wtforms import StringField,TextAreaField,SelectField, SubmitField,ValidationError
 from wtforms.validators import Required,Email
 from flask_login import current_user
 from ..models import User
@@ -24,4 +24,6 @@ class UpdateProfile(FlaskForm):
 class CreateNote(FlaskForm):
   title = StringField('Title',validators=[Required()])
   content = TextAreaField('Note Content',validators=[Required()])
+  category = SelectField('Category', choices=[('To do list','To do list'),('Items to remember','Items to remember'),('Online resources','Online resources'),('General','General')],validators=[Required()])
+
   submit = SubmitField('Add')

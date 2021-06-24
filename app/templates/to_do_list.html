@@ -1,16 +1,18 @@
-{% extends 'base.html' %}
+{% extends 'base.html'%}
+
 <!-- Styles block -->
-{% block styles %}
+{% block styles%}
 {{ super() }}
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
   integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
   integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="stylesheet" href="../static/css/index.css" />
-{% endblock styles %}
+{% endblock %}
 
 {% block content %}
 <div class="container-fluid">
+  <hr>
   <div class="row">
     <div class="col-md-2">
       <div class="profile-header">
@@ -45,9 +47,19 @@
         </ul>
       </div>
     </div>
-    <div class="col-md-10">
-      <h1>WHOOOPS we can't find that page</h1>
+    <div class="col-md-8">
+      <div class="notes" id="notesContainer">
+        {% for note in todo %}
+        <div class="note">
+          <h4><a href="{{url_for('main.note',id = note.id)}}">{{note.title | upper}}</a></h4>
+          <h5>{{note.content}}</h5>
+          <h5>Category: {{note.category}}</h5>
+          <p>Noted on :<small class="text-muted mr-2"> {{note.time.strftime('%d-%m-%Y')}}</small> by <a
+              href="user/{{note.user.username}}">{{note.user.username}}</a></p>
+        </div>
+        {% endfor %}
     </div>
+    <div class="col-md-2"></div>
   </div>
 </div>
-{% endblock content %}
+{% endblock %}
