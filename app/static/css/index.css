@@ -75,6 +75,10 @@ table {
   height: 100px;
   font-size: medium;
 }
+.text-centre, .testimonial-card {
+  text-align: center;
+  margin-top: 4rem !important;
+}
 .card-img img {
   border-radius: 50% !important;
 }
