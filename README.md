@@ -2,9 +2,10 @@
 ## Authors
 [Roney Juma](https://github.com/Roney-juma), [Anne Chege](https://github.com/annechege), [Gabriel Ayuel](https://github.com/ayuelgarang105), and [Nicholas Ngetich](https://github.com/ngetichnicholas)
 *****
-This is a Python Flask application that reminds people to take a break at work session.A user can log into the application and can set the amount of time he/she wants to work.The user can also set the amount of time he/she wants to be on break and see how much time they have left for working or taking a break. (A countdown clock).
+# DESCRIPTION
+This is a Web Flask application that provides a platform for saving notes of things to do at a particular time, resources to check on or research at, things to remember and general notes one wants to have them recorded for future reference.
 *****
-![alt text](https://github.com/Roney-juma/Pomodoro-Flask/blob/master/app/static/images/homepage.png)
+![alt text](https://github.com/Roney-juma/NoteBook-Flask/blob/master/app/static/images/homepage.png)
 *****
 ### Prerequisites
 * Python 3
@@ -15,11 +16,11 @@ This is a Python Flask application that reminds people to take a break at work s
 ## Setup Instruction
 To access this project on your local files, you can clone it using these steps
 1. Open your terminal
-1. Use this command to clone $ git clone https://github.com/Roney-juma/Pomodoro-Flask.git
+1. Use this command to clone $ git clone https://github.com/Roney-juma/NoteBook-Flask.git
 1. This will clone the repositoty into your local folder
 *****
 ### Live Link
-Or you can access the web application directly via this [LIVE LINK](https://pomodoro-timer-nick.herokuapp.com/).
+Or you can access the web application directly via this [LIVE LINK](...................).
 ******
 ## Dependencies
 * Flask Bootstrap
