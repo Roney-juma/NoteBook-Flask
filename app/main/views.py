@@ -68,6 +68,11 @@ def delete_note(note_id):
     note.delete()
     return redirect(url_for('main.index'))
 
+@main.route('/to_do_list')
+def toDoList():
+    todo = Note.query.filter_by(category = 'To do list').all() 
+    return render_template('to_do_list.html', todo = todo)
+
 @main.route('/subscribe',methods = ['POST','GET'])
 def subscribe():
     email = request.form.get('subscriber')
