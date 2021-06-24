@@ -7,4 +7,4 @@ Post: {{note.content|truncate(30)}}
 
 Regards,
 
-Quick notes - Nicholas Ngetich
+Quick notes - Roney Juma
