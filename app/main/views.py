@@ -29,8 +29,9 @@ def new_note():
     if form.validate_on_submit():
         title = form.title.data
         content = form.content.data
+        category = form.category.data
         user_id =  current_user._get_current_object().id
-        note = Note(title=title, content=content,user_id=user_id)
+        note = Note(title=title, content=content,category=category,user_id=user_id)
         note.save()
         for subscriber in subscribers:
             mail_message("New note created","email/new_note",subscriber.email,note=note)
@@ -47,11 +48,15 @@ def updatenote(note_id):
     if form.validate_on_submit():
         note.title = form.title.data
         note.content = form.content.data
+        category = form.category.data
+
         db.session.commit()
         return redirect(url_for('main.note',id = note.id)) 
     if request.method == 'GET':
         form.title.data = note.title
         form.content.data = note.content
+        form.category = form.category.data
+
     return render_template('edit_note.html', form = form)
 
 @main.route('/note/<note_id>/delete', methods = ['POST'])
