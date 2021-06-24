@@ -83,6 +83,11 @@ def online():
     online = Note.query.filter_by(category = 'Online resources').all()
     return render_template('online.html', online = online)
 
+@main.route('/general')
+def general():
+    general = Note.query.filter_by(category = 'General').all()
+    return render_template('general.html', general = general)
+
 @main.route('/subscribe',methods = ['POST','GET'])
 def subscribe():
     email = request.form.get('subscriber')
