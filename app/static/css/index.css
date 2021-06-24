@@ -82,3 +82,14 @@ table {
 .card-img img {
   border-radius: 50% !important;
 }
+ul li{
+  width: 100% !important;
+  color: white !important;
+}
+ul li a{
+  color: white !important;
+}
+ul li a:hover{
+  color: white !important;
+  color: #16425B !important;
+}
