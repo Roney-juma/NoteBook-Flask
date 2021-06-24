@@ -26,7 +26,7 @@
         {% if note.user == current_user %}
         <a class="btn btn-info btn-sm m-1" href="{{url_for('main.updatenote',note_id = note.id)}}"><i
             class="fas fa-edit" style='font-size:30px;'></i><br>Edit note</a>
-        <form id="deleteForm" action="{{url_for('main.delete_post',note_id = note.id)}}" method="POST">
+        <form id="deleteForm" action="{{url_for('main.delete_note',note_id = note.id)}}" method="POST">
           <button class="btn btn-sm btn-danger m-1" type="submit"><i class="fas fa-trash"
               style='font-size:30px;'></i><br>Delete note </button>
         </form>
