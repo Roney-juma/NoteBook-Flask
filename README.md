@@ -16,11 +16,11 @@ This is a Python Flask application that provides a platform for saving notes of 
 ## Setup Instruction
 To access this project on your local files, you can clone it using these steps
 1. Open your terminal
-1. Use this command to clone $ git clone https://github.com/Roney-juma/Pomodoro-Flask.git
+1. Use this command to clone $ git clone https://github.com/Roney-juma/NoteBook-Flask.git
 1. This will clone the repositoty into your local folder
 *****
 ### Live Link
-Or you can access the web application directly via this [LIVE LINK](https://pomodoro-timer-nick.herokuapp.com/).
+Or you can access the web application directly via this [LIVE LINK]().
 ******
 ## Dependencies
 * Flask Bootstrap
