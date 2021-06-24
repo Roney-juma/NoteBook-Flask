@@ -48,7 +48,7 @@ class Note(db.Model):
   content = db.Column(db.Text(), nullable = False)
   user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
   time = db.Column(db.DateTime, default = datetime.utcnow)
-  category = db.Column(db.String(255), index = True,nullable = False)
+  # category = db.Column(db.String(255), index = True,nullable = False)
 
   def save(self):
     db.session.add(self)
