@@ -54,6 +54,15 @@ def updatenote(note_id):
         form.content.data = note.content
     return render_template('edit_note.html', form = form)
 
+@main.route('/note/<note_id>/delete', methods = ['POST'])
+@login_required
+def delete_note(note_id):
+    note = Note.query.get(note_id)
+    if note.user != current_user:
+        abort(403)
+    note.delete()
+    return redirect(url_for('main.index'))
+
 @main.route('/subscribe',methods = ['POST','GET'])
 def subscribe():
     email = request.form.get('subscriber')
