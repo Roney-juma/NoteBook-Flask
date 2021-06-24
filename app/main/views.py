@@ -37,6 +37,23 @@ def new_note():
         return redirect(url_for('main.index'))
     return render_template('add_note.html', form = form)
 
+@main.route('/note/<note_id>/update', methods = ['GET','POST'])
+@login_required
+def updatenote(note_id):
+    note = Note.query.get(note_id)
+    if note.user != current_user:
+        abort(403)
+    form = CreateNote()
+    if form.validate_on_submit():
+        note.title = form.title.data
+        note.content = form.content.data
+        db.session.commit()
+        return redirect(url_for('main.note',id = note.id)) 
+    if request.method == 'GET':
+        form.title.data = note.title
+        form.content.data = note.content
+    return render_template('edit_note.html', form = form)
+
 @main.route('/subscribe',methods = ['POST','GET'])
 def subscribe():
     email = request.form.get('subscriber')
