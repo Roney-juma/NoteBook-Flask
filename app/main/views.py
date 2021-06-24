@@ -75,8 +75,13 @@ def toDoList():
 
 @main.route('/to_recall_list')
 def toRecallList():
-    todo = Note.query.filter_by(category = 'Items to remember').all()
-    return render_template('to_recall.html', todo = todo)
+    torecall = Note.query.filter_by(category = 'Items to remember').all()
+    return render_template('to_recall.html', torecall = torecall)
+
+@main.route('/online_resource')
+def online():
+    online = Note.query.filter_by(category = 'Online resources').all()
+    return render_template('online.html', online = online)
 
 @main.route('/subscribe',methods = ['POST','GET'])
 def subscribe():
