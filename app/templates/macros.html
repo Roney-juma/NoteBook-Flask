@@ -1,0 +1,20 @@
+{% macro display(notes) %}
+<div class="container-fluid">
+	<div class="row">
+		{% if notes %}
+		{% for category in notes %}
+		<div class="col-md-4">
+			<div class="thumbnail" id="carded">
+				<h5 class="card-header">{{category.title}}</h5>
+				<div class="card-body">
+					<p>{{category.content}}</p>
+					<p class="text-center"> Category: {{category.}}</p>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+		{% else %}
+		{% endif %}
+	</div>
+</div>
+{% endmacro %}
