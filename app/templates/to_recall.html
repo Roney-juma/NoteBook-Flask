@@ -17,46 +17,51 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <li> <a class="btn btn-outline-primary" id="post" href="{{url_for('main.index')}}"><i class="fas fa-home"
-            style="font-size: 80px;"></i><br>Home</a>
-      </li>
+                style="font-size: 80px;"></i><br>Home</a>
+          </li>
           <li>
             {% if current_user.is_authenticated %}
-            <a class="btn" id="post" href="{{url_for('main.new_note')}}"><i
-                class="fas fa-plus-circle" style="font-size: 80px;"></i><br> Add Note</a>
+            <a class="btn" id="post" href="{{url_for('main.new_note')}}"><i class="fas fa-plus-circle"
+                style="font-size: 80px;"></i><br> Add Note</a>
           </li>
           <li>
-            <a class="btn" id="" href="{{url_for('main.profile',name=current_user.username)}}"><i
-              class="fas fa-user" style="font-size: 80px;"></i><br><div>{{current_user.username}}</div></a>
+            <a class="btn" id="" href="{{url_for('main.profile',name=current_user.username)}}"><i class="fas fa-user"
+                style="font-size: 80px;"></i><br>
+              <div>{{current_user.username}}</div>
+            </a>
           </li>
           <li>
-            <a class="btn" id="" href="{{url_for('auth.logout')}}"><i
-              class="fa fa-sign-out" aria-hidden="true" style="font-size: 80px;"></i><br> Sign Out</a>
+            <a class="btn" id="" href="{{url_for('auth.logout')}}"><i class="fa fa-sign-out" aria-hidden="true"
+                style="font-size: 80px;"></i><br> Sign Out</a>
           </li>
           {% else %}
           <li>
-            <a class="btn" href="{{url_for('auth.login')}}"><i
-                class="fas fa-sign-in-alt" style="font-size: 80px;"></i><br>Log In</a>
+            <a class="btn" href="{{url_for('auth.login')}}"><i class="fas fa-sign-in-alt"
+                style="font-size: 80px;"></i><br>Log In</a>
           </li>
           <li>
-            <a class="btn" href="{{url_for('auth.signup')}}"><i
-                class="fas fa-user-plus" style="font-size: 80px;"></i></i><br>Sign Up</a>
+            <a class="btn" href="{{url_for('auth.signup')}}"><i class="fas fa-user-plus"
+                style="font-size: 80px;"></i></i><br>Sign Up</a>
           </li>
           {%endif%}
         </ul>
       </div>
     </div>
-    <div class="col-md-8">
-      <div class="notes" id="notesContainer">
+    <div class="col-md-10">
+      <div class="notes-header">
+        <h2>Items to Recall</h2>
+      </div>
+      <div class="notes notes-container">
         {% for note in torecall %}
         <div class="note">
-          <h4><a href="{{url_for('main.note',id = note.id)}}">{{note.title | upper}}</a></h4>
-          <h5>{{note.content}}</h5>
-          <h5>Category: {{note.category}}</h5>
-          <p>Noted on :<small class="text-muted mr-2"> {{note.time.strftime('%d-%m-%Y')}}</small> by <a
-              href="user/{{note.user.username}}">{{note.user.username}}</a></p>
+          <h3><a href="{{url_for('main.note',id = note.id)}}">{{note.title | upper}}</a></h3>
+          <p>{{note.content}}</p>
+          <p>Category: {{note.category}}</p>
+          <p>Noted on :<small> {{note.time.strftime('%d-%m-%Y')}}</small></p>
         </div>
         {% endfor %}
-      </div>
     </div>
   </div>
-  {% endblock %}
+  </div>
+</div>
+{% endblock %}

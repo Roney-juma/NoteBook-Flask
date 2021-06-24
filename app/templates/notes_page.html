@@ -53,10 +53,9 @@
         {% for note in notes %}
         <div class="note">
           <h4><a href="{{url_for('main.note',id = note.id)}}">{{note.title | upper}}</a></h4>
-          <h5>{{note.content}}</h5>
-          <h5>Category: {{note.category}}</h5>
-          <p>Noted on :<small class="text-muted mr-2"> {{note.time.strftime('%d-%m-%Y')}}</small> by <a
-              href="user/{{note.user.username}}">{{note.user.username}}</a></p>
+          <p>{{note.content}}</p>
+          <p>Category: {{note.category}}</p>
+          <p>Noted on :<small style="font-weight: 100;"> {{note.time.strftime('%d-%m-%Y')}}</small></p>
 
         </div>
 
@@ -70,18 +69,22 @@
       <div class="categories">
         <div class="category_list">
           <h3>To Do List</h3>
+          <p>We have sorted out for you list of items in To Do List</p>
           <a id="sign" href="{{url_for('main.toDoList')}}">View items in To Do List</a>
         </div>
         <div class="category_list">
           <h3>Items to Remember</h3>
+          <p>We have sorted out for you list of items to recall</p>
           <a id="sign" href="{{url_for('main.toRecallList')}}">View items to recall</a>
         </div>
         <div class="category_list">
           <h3>Online Resources</h3>
+          <p>We have sorted out for you list of online resources you stored for reference</p>
           <a id="sign" href="{{url_for('main.online')}}">View items in To Do List</a>
         </div>
         <div class="category_list">
-          <h3>Generall</h3>
+          <h3>General Notes</h3>
+          <p>Here you can find all your general notes you have saved in the Quick Note</p>
           <a id="sign" href="{{url_for('main.general')}}">View items in To Do List</a>
         </div>
       </div>

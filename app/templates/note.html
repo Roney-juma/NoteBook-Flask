@@ -46,10 +46,9 @@
       </div>
     </div>
     <div class="col-md-8">
-      <h2>{{note.title | upper}}</h2>
+      <h3>{{note.title | upper}}</h3>
       <p>{{note.content}}</p>
-      <p>Posted on :<small class="text-muted mr-2"> {{note.time.strftime('%d-%m-%Y')}}</small> by
-        {{note.user.username}}</p>
+      <p>Noted on :<small > {{note.time.strftime('%d-%m-%Y')}}</small>
       <div>
         {% if note.user == current_user %}
         <a class="btn btn-info btn-sm m-1" href="{{url_for('main.updatenote',note_id = note.id)}}"><i

@@ -1,6 +1,13 @@
-
+body {
+  font-size: 18px;
+}
 h2 {
   text-align: center;
+}
+h3 {
+  color: #16425B;
+}.col-md-10 {
+  padding-top: 15px;
 }
 .profile-col {
   display: flex;
@@ -15,10 +22,26 @@ h2 {
 .notes-header, .categories-header {
   padding-top: 2vh;
   height: 10vh;
+  border-bottom: 2px solid white;
+}
+.notes, .categories {
+  height: 90vh;
+  overflow-y: auto;
+}
+.notes-container {
+  height: 87vh;
+}
+.notes-col {
+  background-color: #D4CECE;
+}
+.categories-col {
+  background-color: #E5E5E5;
 }
 .note {
   background-color: #D4CECE;
   height: auto;
+  padding: 1.5rem;
+  border-bottom: 2px solid white;
 }
 .notes-header {
   background-color: #CECDCD;
@@ -28,6 +51,8 @@ h2 {
 }
 .category_list {
   background-color: #E5E5E5;
+  border-bottom: 2px solid white;
+  padding: 1.5rem;
 }
 
 @media (max-width: 500px) {
@@ -35,12 +60,6 @@ h2 {
 }
 table {
   border: 1.5px solid #584b53 !important;
-}
-.banner {
-  background-color: #fef5ef;
-  height: 600px;
-  text-align: center;
-  padding: 5% 10% 5% 10%;
 }
 #userTable {
   font-family: Arial, Helvetica, sans-serif;
