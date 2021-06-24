@@ -3,6 +3,8 @@ h2 {
   text-align: center;
 }
 .profile-col {
+  display: flex;
+  flex-direction: column;
   height: 100vh;
   background-color: #16425B;
 }
@@ -23,6 +25,9 @@ h2 {
 }
 .categories-header {
   background-color: #DCE2E1;
+}
+.category-item {
+  background-color: #E5E5E5;
 }
 @media (max-width: 500px) {
 

@@ -19,7 +19,6 @@ class User(UserMixin,db.Model):
   profile_pic_path = db.Column(db.String())
   notes = db.relationship('Note', backref='user', lazy='dynamic')
 
-
   @property
   def set_password(self):
     raise AttributeError('You cannot read the password attribute')
@@ -49,6 +48,7 @@ class Note(db.Model):
   content = db.Column(db.Text(), nullable = False)
   user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
   time = db.Column(db.DateTime, default = datetime.utcnow)
+  # category = db.Column(db.String(255), index = True,nullable = False)
 
   def save(self):
     db.session.add(self)
