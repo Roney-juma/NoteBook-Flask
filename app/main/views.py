@@ -73,6 +73,11 @@ def toDoList():
     todo = Note.query.filter_by(category = 'To do list').all() 
     return render_template('to_do_list.html', todo = todo)
 
+@main.route('/to_recall_list')
+def toRecallList():
+    todo = Note.query.filter_by(category = 'Items to remember').all()
+    return render_template('to_recall.html', todo = todo)
+
 @main.route('/subscribe',methods = ['POST','GET'])
 def subscribe():
     email = request.form.get('subscriber')
