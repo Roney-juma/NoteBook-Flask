@@ -47,7 +47,7 @@
         </ul>
       </div>
     </div>
-    <div class="col-md-8" id="login">
+    <div class="col-md-10" id="login">
       <h3 class="text-center"><i class="fas fa-sign-in-alt text-center"></i>&nbsp; <strong class="text-center">Log In
           Here</strong></h3>
           {% for message in get_flashed_messages() %}
@@ -59,7 +59,6 @@
       {{wtf.quick_form(loginform)}}
       <p> Don't have an account? <a id="sign" href="{{url_for('auth.signup')}}">Sign up here</a></p>
     </div>
-    <div clas="col-md-2"> </div>
   </div>
 </div>
 {% endblock %}

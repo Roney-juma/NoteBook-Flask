@@ -11,9 +11,10 @@ from ..email import mail_message
 
 #Views
 @main.route('/')
+@login_required
 def index():
     notes = Note.query.order_by(Note.time.desc())
-    return render_template('notes_page.html', notes=notes)
+    return render_template('index.html', notes=notes)
 
 @main.route('/note/<id>')
 @login_required

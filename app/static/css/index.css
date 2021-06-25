@@ -4,6 +4,11 @@ body {
 h2 {
   text-align: center;
 }
+#login,#rejister,.updateprofile, .pict, .details, .create,.error-col {
+  background-color: #D4CECE;
+  padding: 15px;
+  height: 100vh;
+}
 h3 {
   color: #16425B;
 }.col-md-10 {
@@ -55,9 +60,6 @@ h3 {
   padding: 1.5rem;
 }
 
-@media (max-width: 500px) {
-
-}
 table {
   border: 1.5px solid #584b53 !important;
 }
@@ -111,4 +113,29 @@ ul li a{
 ul li a:hover{
   color: white !important;
   color: #16425B !important;
+}
+@media (max-width: 1000px) {
+  .profile-col {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+  }
+  .notes-col,.categories-col {
+    height: auto;
+    background-color: white
+  }
+  .notes-header, .categories-header {
+    padding-top: 2vh;
+    height: 10vh;
+    border-bottom: 2px solid white;
+  }
+  .notes, .categories {
+    height: auto;
+  }
+  .notes-container {
+    height: auto;
+  }
+  .fas, .fa {
+    font-size: 20px !important;
+  }
 }

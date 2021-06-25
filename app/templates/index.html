@@ -1,16 +1,107 @@
+{% extends 'base.html' %}
 
-    <h1>Category</h1>
-<div class="row">
-    <div class="clo-md-3">
-        <!-- Profile -->
+<!-- Styles block -->
+{% block styles%}
+{{ super() }}
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+  integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="../static/css/index.css" />
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2 profile-col">
+      <div>
+        <ul class="nav navbar-nav">
+          <li> <a class="btn btn-outline-primary" id="post" href="{{url_for('main.index')}}"><i class="fas fa-home"
+            style="font-size: 80px;"></i><br>Home</a>
+      </li>
+          <li>
+            {% if current_user.is_authenticated %}
+            <a class="btn" id="post" href="{{url_for('main.new_note')}}"><i
+                class="fas fa-plus-circle" style="font-size: 80px;"></i><br> Add Note</a>
+          </li>
+          <li>
+            <a class="btn" id="" href="{{url_for('main.profile',name=current_user.username)}}"><i
+              class="fas fa-user" style="font-size: 80px;"></i><br><div>{{current_user.username}}</div></a>
+          </li>
+          <li>
+            <a class="btn" id="" href="{{url_for('auth.logout')}}"><i
+              class="fa fa-sign-out" aria-hidden="true" style="font-size: 80px;"></i><br> Sign Out</a>
+          </li>
+          {% else %}
+          <li>
+            <a class="btn" href="{{url_for('auth.login')}}"><i
+                class="fas fa-sign-in-alt" style="font-size: 80px;"></i><br>Log In</a>
+          </li>
+          <li>
+            <a class="btn" href="{{url_for('auth.signup')}}"><i
+                class="fas fa-user-plus" style="font-size: 80px;"></i></i><br>Sign Up</a>
+          </li>
+          {%endif%}
+        </ul>
+      </div>
     </div>
-    <div class="col-md-4">
-        <!-- Notes -->
+    <div class="col-md-5 notes-col">
+      <div class="notes-header">
+        <h2>All Notes</h2>
+      </div>
+      <div class="notes" id="notesContainer">
+        {% for note in notes %}
+        <div class="note">
+          <h4><a href="{{url_for('main.note',id = note.id)}}">{{note.title | upper}}</a></h4>
+          <p>{{note.content}}</p>
+          <p>Category: {{note.category}}</p>
+          <p>Noted on :<small style="font-weight: 100;"> {{note.time.strftime('%d-%m-%Y')}}</small></p>
+
+        </div>
+
+        {% endfor %}
+      </div>
     </div>
-    <div class="col-md-5">
-        category
+    <div class="col-md-5 categories-col">
+      <div class="categories-header">
+        <h2>Categories</h2>
+      </div>
+      <div class="categories">
+        <div class="category_list">
+          <h3>To Do List</h3>
+          <p>We have sorted out for you list of items in To Do List</p>
+          <a id="sign" href="{{url_for('main.toDoList')}}">View items in To Do List</a>
+        </div>
+        <div class="category_list">
+          <h3>Items to Remember</h3>
+          <p>We have sorted out for you list of items to recall</p>
+          <a id="sign" href="{{url_for('main.toRecallList')}}">View items to recall</a>
+        </div>
+        <div class="category_list">
+          <h3>Online Resources</h3>
+          <p>We have sorted out for you list of online resources you stored for reference</p>
+          <a id="sign" href="{{url_for('main.online')}}">View items in To Do List</a>
+        </div>
+        <div class="category_list">
+          <h3>General Notes</h3>
+          <p>Here you can find all your general notes you have saved in the Quick Note</p>
+          <a id="sign" href="{{url_for('main.general')}}">View items in To Do List</a>
+        </div>
+        <div class="message-comment">
+          <form id="subscribeForm" class="form-inline ml-2" action="{{url_for('main.subscribe')}}" method="POST">
+            <h1 class="subscribe">Subscribe Here</h1>
+            <div class="md-form form-group">
+              <input type="email" class="form-control" placeholder="Email Address..." name="subscriber" required>
+            </div>
+            <div class="md-form form-group">
+              <button class="btn btn-primary" id="subs">Subscribe</button>
+            </div>
+          </form>
+      </div>
+      </div>
 
     </div>
 
-
+  </div>
 </div>
+{% endblock %}
